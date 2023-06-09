@@ -1,8 +1,8 @@
 const String imagePath = 'assets/images';
-const String animsPath = 'assets/anims';
 
 class AssetsManager {
-  // static const String quranLogo = "$imagePath/quran.png";
+  static const String saleWallpaper = "$imagePath/sale_wallpaper.jpg";
+  static const String loginWallpaper = "$imagePath/login_wallpaper.jpg";
 
 
 }

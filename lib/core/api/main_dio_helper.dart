@@ -6,7 +6,7 @@ class MainDioHelper{
   static init(){
     dio=Dio(
         BaseOptions(
-          baseUrl: 'http://api.alquran.cloud/v1/',
+          baseUrl: 'https://fakestoreapi.com',
           receiveDataWhenStatusError: true,
         )
     );

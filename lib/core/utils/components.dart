@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app_values.dart';
+import 'strings.dart';
 
 class Components {
   static String getOS() {
@@ -11,21 +12,23 @@ class Components {
   }
 
   static showSnackBar({
-    required String title,
     required String message,
     required Color backgroundColor,
     int durationWithMilliSeconds = 2000,
     required Color textColor,
   }) {
-    Get.snackbar(title, message,
-        margin: EdgeInsets.symmetric(
-            vertical: AppSize.s30, horizontal: AppSize.s10),
-        backgroundColor: backgroundColor,
-        colorText: textColor,
-        animationDuration: const Duration(
-          milliseconds: 500,
-        ),
-        duration: Duration(milliseconds: durationWithMilliSeconds));
+    Get.snackbar(
+      AppStrings.appName,
+      message,
+      margin:
+          EdgeInsets.symmetric(vertical: AppSize.s30, horizontal: AppSize.s10),
+      backgroundColor: backgroundColor,
+      colorText: textColor,
+      animationDuration: const Duration(
+        milliseconds: 500,
+      ),
+      duration: Duration(milliseconds: durationWithMilliSeconds),
+    );
   }
 
   static navigateAndFinish({required context, required widget}) {

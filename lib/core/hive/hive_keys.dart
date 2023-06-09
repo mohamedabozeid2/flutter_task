@@ -1,3 +1,4 @@
-// enum HiveKeys{
-//
-// }
+enum HiveKeys{
+  currentUser,
+  currentUserToken,
+}
