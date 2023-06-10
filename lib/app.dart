@@ -10,10 +10,10 @@ import 'core/utils/helper.dart';
 import 'core/utils/strings.dart';
 import 'features/presentation/controller/home_cubit/home_cubit.dart';
 import 'features/presentation/controller/user_cubit/user_cubit.dart';
-import 'features/presentation/screens/login_screen/login_screen.dart';
 
 class MarketSquare extends StatelessWidget {
-  const MarketSquare({super.key});
+  final Widget startWidget;
+  const MarketSquare({super.key, required this.startWidget,});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class MarketSquare extends StatelessWidget {
           },
         );
       },
-      child: LoginScreen(),
+      child: startWidget,
     );
   }
 }

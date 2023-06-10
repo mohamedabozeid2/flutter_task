@@ -5,4 +5,6 @@ class AppIcons {
   static IconData visibilityOff = Icons.visibility_off;
   static IconData userName = Icons.person;
   static IconData password = Icons.lock;
+  static IconData email = Icons.email;
+  static IconData arrowBack = Icons.arrow_back_ios;
 }

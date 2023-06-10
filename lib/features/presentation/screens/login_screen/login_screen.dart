@@ -6,6 +6,7 @@ import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/app_values.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/components.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/strings.dart';
 import '../../../../core/widgets/adaptive_indicator.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -15,19 +16,46 @@ import '../../controller/user_cubit/user_cubit.dart';
 import '../../controller/user_cubit/user_states.dart';
 import 'widgets/no_email_widget.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController userNameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final Color formItemsColor = Colors.white;
 
-  LoginScreen({super.key});
+  @override
+  void initState() {
+    UserCubit.get(context).isVisible = true;
+    UserCubit.get(context).visibilityIcon = AppIcons.visibility;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(),
-      body: LayoutWithBackgroundImage(frontWidget: loginForm(context: context)),
+      body: LayoutWithBackgroundImage(
+          frontWidget: Container(
+        width: Helper.getMaxWidth(),
+        padding: EdgeInsets.all(AppSize.s20),
+        margin: EdgeInsets.all(AppSize.s15),
+        decoration: BoxDecoration(
+            color: Colors.transparent.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(AppSize.s20)),
+        child: Center(
+          child: loginForm(
+            context: context,
+          ),
+        ),
+      )),
     );
   }
 
@@ -52,20 +80,11 @@ class LoginScreen extends StatelessWidget {
             context: context,
             controller: userNameController,
             type: TextInputType.name,
-            iconColor: formItemsColor,
             borderColor: formItemsColor,
-            prefixIcon: Icon(AppIcons.userName, color: formItemsColor),
-            contentStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: formItemsColor,
-                ),
-            hintStyle: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: formItemsColor),
             label: AppStrings.userName,
           ),
           SizedBox(
-            height: AppSize.s10,
+            height: AppSize.s15,
           ),
           BlocConsumer<UserCubit, UserStates>(
             buildWhen: (previous, current) =>
@@ -75,26 +94,17 @@ class LoginScreen extends StatelessWidget {
               return CustomTextField(
                 context: context,
                 controller: passwordController,
-                contentStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: formItemsColor,
-                    ),
                 type: TextInputType.visiblePassword,
-                iconColor: formItemsColor,
-                prefixIcon: Icon(AppIcons.password, color: formItemsColor),
                 isPassword: UserCubit.get(context).isVisible,
                 suffixIcon: UserCubit.get(context).visibilityIcon,
                 sufIconFun: () => UserCubit.get(context).changeVisibility(),
                 borderColor: formItemsColor,
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: formItemsColor),
                 label: AppStrings.password,
               );
             },
           ),
           SizedBox(
-            height: AppSize.s10,
+            height: AppSize.s15,
           ),
           BlocConsumer<UserCubit, UserStates>(
             buildWhen: (previous, current) =>
@@ -136,10 +146,9 @@ class LoginScreen extends StatelessWidget {
             },
           ),
           SizedBox(
-            height: AppSize.s10,
+            height: AppSize.s15,
           ),
           const NoEmailWidget(),
-
         ],
       );
 }

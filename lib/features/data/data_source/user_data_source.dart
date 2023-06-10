@@ -2,15 +2,26 @@ import '../../../core/api/end_points.dart';
 import '../../../core/api/main_dio_helper.dart';
 import '../../../core/error/exception.dart';
 import '../../../core/network/main_error_message_model.dart';
-import '../model/user_model.dart';
 
 abstract class BaseUserRemoteDataSource {
   Future<String> userLogin({
     required String userName,
     required String password,
   });
-  Future<UserModel> userRegister({
-    required UserModel userData,
+
+  Future<int> userRegister({
+    required String email,
+    required String userName,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String city,
+    required String street,
+    required String streetNumber,
+    required String zipCode,
+    required String lat,
+    required String long,
+    required String phone,
   });
 }
 
@@ -22,7 +33,7 @@ class UserRemoteDataSource implements BaseUserRemoteDataSource {
   }) async {
     try {
       final response =
-      await MainDioHelper.postData(url: EndPoints.login.endpoint, data: {
+          await MainDioHelper.postData(url: EndPoints.login.endpoint, data: {
         'username': userName,
         'password': password,
       });
@@ -31,7 +42,7 @@ class UserRemoteDataSource implements BaseUserRemoteDataSource {
       } else {
         throw MainServerException(
             mainErrorMessageModel:
-            MainErrorMessageModel.fromJson(response.data));
+                MainErrorMessageModel.fromJson(response.data));
       }
     } catch (e) {
       throw MainServerException(
@@ -43,37 +54,51 @@ class UserRemoteDataSource implements BaseUserRemoteDataSource {
   }
 
   @override
-  Future<UserModel> userRegister({required UserModel userData}) async {
+  Future<int> userRegister({
+    required String email,
+    required String userName,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String city,
+    required String street,
+    required String streetNumber,
+    required String zipCode,
+    required String lat,
+    required String long,
+    required String phone,
+  }) async {
     try {
       final response =
-      await MainDioHelper.postData(url: EndPoints.users.endpoint, data: {
-        'email': userData.email,
-        'username': userData.userName,
-        'password': userData.password,
+          await MainDioHelper.postData(url: EndPoints.users.endpoint, data: {
+        'email': email,
+        'username': userName,
+        'password': password,
         'name': {
-          'firstname': userData.name.firstname,
-          'lastname': userData.name.lastname,
+          'firstname': firstName,
+          'lastname': lastName,
         },
         'address': {
-          'city': userData.address.city,
-          'street': userData.address.street,
-          'number': userData.address.number,
-          'zipcode': userData.address.zipcode,
+          'city': city,
+          'street': street,
+          'number': streetNumber,
+          'zipcode': zipCode,
           'geolocation': {
-            'lat': userData.address.geolocation.lat,
-            'long': userData.address.geolocation.long,
+            'lat': lat,
+            'long': long,
           }
         },
-        'phone': userData.phone,
+        'phone': phone,
       });
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data);
+        return response.data['id'];
       } else {
         throw MainServerException(
             mainErrorMessageModel:
-            MainErrorMessageModel.fromJson(response.data));
+                MainErrorMessageModel.fromJson(response.data));
       }
     } catch (e) {
+
       throw MainServerException(
         mainErrorMessageModel: MainErrorMessageModel(
           statusMessage: e.toString(),

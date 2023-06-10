@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task/features/data/model/user_model.dart';
 
 import '../../../../core/hive/hive_helper.dart';
 import '../../../../core/hive/hive_keys.dart';
@@ -64,6 +63,7 @@ class UserCubit extends Cubit<UserStates> {
           emit(UserLoginErrorState(AppStrings.wrongUserNameOrPassword));
         }, (r) {
           addCurrentUserTokenToCacheMemory(token: r);
+
           emit(UserLoginSuccessState());
         });
       });
@@ -79,6 +79,8 @@ class UserCubit extends Cubit<UserStates> {
       data: token,
     );
     Constants.setCurrentUserToken(token: token);
+    HiveHelper.putInBox(box: HiveHelper.loggedIn, key: HiveKeys.loggedIn.toString(), data: true);
+
   }
 
   void addUserDataToCacheMemory({required User userData}) {
@@ -90,7 +92,6 @@ class UserCubit extends Cubit<UserStates> {
     Constants.setCurrentUser(currentUser: userData);
   }
 
-
   bool registerValidation({
     required String userName,
     required String password,
@@ -99,12 +100,36 @@ class UserCubit extends Cubit<UserStates> {
     required String lastName,
     required String city,
     required String street,
-    required int addressNumber,
+    required String streetNumber,
     required String zipCode,
     required phone,
   }) {
-    if (userName.isEmpty) {
+    if (email.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.emailValidation));
+      return false;
+    } else if (userName.isEmpty) {
       emit(UserLoginErrorState(AppStrings.userNameValidation));
+      return false;
+    } else if (firstName.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.firstNameValidation));
+      return false;
+    } else if (lastName.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.lastNameValidation));
+      return false;
+    } else if (city.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.cityValidation));
+      return false;
+    } else if (street.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.streetValidation));
+      return false;
+    } else if (streetNumber.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.streetNumberValidation));
+      return false;
+    } else if (zipCode.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.zipCodeValidation));
+      return false;
+    } else if (phone.isEmpty) {
+      emit(UserRegisterErrorState(AppStrings.phoneValidation));
       return false;
     } else if (password.isEmpty) {
       emit(UserLoginErrorState(AppStrings.passwordValidation));
@@ -115,17 +140,58 @@ class UserCubit extends Cubit<UserStates> {
   }
 
   void userRegister({
-    required UserModel userModel,
+    required String email,
+    required String userName,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String city,
+    required String street,
+    required String streetNumber,
+    required String zipCode,
+    required String lat,
+    required String long,
+    required String phone,
   }) {
     emit(UserRegisterLoadingState());
-    userRegisterUserCase.execute(userData: userModel).then((value) {
-      value.fold((l) {
-        emit(UserRegisterErrorState(AppStrings.invalidInputs));
-      }, (r) {
-        print(r.userName);
-        addUserDataToCacheMemory(userData: r);
-        emit(UserRegisterSuccessState());
+    if (registerValidation(
+        userName: userName,
+        password: password,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        city: city,
+        street: street,
+        streetNumber: streetNumber,
+        zipCode: zipCode,
+        phone: phone)) {
+      userRegisterUserCase
+          .execute(
+        userName: userName,
+        email: email,
+        password: password,
+        city: city,
+        firstName: firstName,
+        lastName: lastName,
+        lat: lat,
+        long: long,
+        phone: phone,
+        street: street,
+        streetNumber: streetNumber,
+        zipCode: zipCode,
+      )
+          .then((value) {
+        value.fold((l) {
+          emit(UserRegisterErrorState(AppStrings.invalidInputs));
+        }, (r) {
+          HiveHelper.putInBox(
+            box: HiveHelper.loggedIn,
+            key: HiveKeys.loggedIn.toString(),
+            data: true,
+          );
+          emit(UserRegisterSuccessState());
+        });
       });
-    });
+    }
   }
 }

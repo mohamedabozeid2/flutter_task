@@ -6,6 +6,7 @@ import 'hive_keys.dart';
 class HiveHelper {
   static late Box<User> currentUser;
   static late Box<String> currentUserToken;
+  static late Box<bool> loggedIn;
 
   static Future<void> init({required String path}) async {
     await Hive.initFlutter(path);
@@ -15,6 +16,7 @@ class HiveHelper {
     currentUser = await Hive.openBox<User>(HiveKeys.currentUser.toString());
     currentUserToken =
         await Hive.openBox<String>(HiveKeys.currentUserToken.toString());
+    loggedIn = await Hive.openBox<bool>(HiveKeys.loggedIn.toString());
   }
 
   static Future<void> putInBox({
@@ -28,7 +30,7 @@ class HiveHelper {
   static Future<dynamic> getBoxData({
     required Box box,
     required String key,
-  }) async{
+  }) async {
     return await box.get(key);
   }
 

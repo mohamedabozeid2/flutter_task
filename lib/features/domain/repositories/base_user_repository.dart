@@ -8,7 +8,18 @@ abstract class BaseUserRepository {
     required String userName,
     required String password,
   });
-  Future<Either<Failure, UserModel>> userRegister({
-    required UserModel userData,
+  Future<Either<Failure, int>> userRegister({
+    required String email,
+    required String userName,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String city,
+    required String street,
+    required String streetNumber,
+    required String zipCode,
+    required String lat,
+    required String long,
+    required String phone,
   });
 }

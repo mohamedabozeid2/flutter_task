@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/core/hive/hive_keys.dart';
+import 'package:flutter_task/features/presentation/screens/home_screen/home_screen.dart';
+import 'package:flutter_task/features/presentation/screens/login_screen/login_screen.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
@@ -20,11 +23,22 @@ void main() async {
   ServicesLocator().init();
   MainDioHelper.init();
 
+  Widget startWidget;
+  bool loggedIn = await HiveHelper.getBoxData(
+    box: HiveHelper.loggedIn,
+    key: HiveKeys.loggedIn.toString(),
+  );
+  if (loggedIn) {
+    startWidget = const HomeScreen();
+  } else {
+    startWidget = const LoginScreen();
+  }
+
   Bloc.observer = MyBlocObserver();
   runApp(
     DevicePreview(
       enabled: /*!kReleaseMode*/ false,
-      builder: (context) => const MarketSquare(),
+      builder: (context) => MarketSquare(startWidget: startWidget),
     ),
   );
 }

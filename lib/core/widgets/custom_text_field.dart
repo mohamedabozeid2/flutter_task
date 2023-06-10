@@ -25,7 +25,8 @@ class CustomTextField extends StatelessWidget {
   void Function(String)? onChangeFunction;
   double borderRadius;
 
-  CustomTextField({super.key,
+  CustomTextField({
+    super.key,
     required this.context,
     required this.controller,
     required this.type,
@@ -63,14 +64,22 @@ class CustomTextField extends StatelessWidget {
         }
         return null;
       },
-      style: contentStyle,
+      style: contentStyle ??
+          Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(color: Colors.white),
       onChanged: onChangeFunction,
       onFieldSubmitted: onSubmitFunction,
       decoration: InputDecoration(
           fillColor: fillColor,
           filled: true,
           hintText: label,
-          hintStyle: hintStyle,
+          hintStyle: hintStyle ??
+              Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.white),
           prefix: prefixWidget,
           prefixIcon: Padding(
             padding: EdgeInsets.all(AppSize.s8),

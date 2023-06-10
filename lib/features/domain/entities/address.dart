@@ -9,7 +9,7 @@ part 'address.g.dart';
 class Address extends HiveObject with EquatableMixin {
   @HiveField(0)final String city;
   @HiveField(1)final String street;
-  @HiveField(2)final int number;
+  @HiveField(2)final String number;
   @HiveField(3)final String zipcode;
   @HiveField(4)final GeoLocation geolocation;
 

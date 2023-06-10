@@ -19,7 +19,7 @@ class AddressAdapter extends TypeAdapter<Address> {
     return Address(
       city: fields[0] as String,
       street: fields[1] as String,
-      number: fields[2] as int,
+      number: fields[2] as String,
       zipcode: fields[3] as String,
       geolocation: fields[4] as GeoLocation,
     );

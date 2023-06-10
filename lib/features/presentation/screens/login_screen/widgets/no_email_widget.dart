@@ -27,8 +27,9 @@ class NoEmailWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Components.navigateTo(
-                context, const RegisterScreen());
+                context, RegisterScreen());
           },
+
           child: Container(
             padding: EdgeInsets.all(AppSize.s7),
             decoration: BoxDecoration(
