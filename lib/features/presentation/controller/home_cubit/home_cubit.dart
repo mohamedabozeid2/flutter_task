@@ -48,6 +48,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List categories = [];
 
   Future<void> getAllCategories() async {
+    categories = [];
     getAllCategoriesUseCase.execute().then((value) {
       value.fold((l) {
         emit(HomeGetAllCategoriesErrorStates(l.message));
@@ -69,6 +70,7 @@ class HomeCubit extends Cubit<HomeStates> {
     required String category,
   }) async {
     emit(HomeGetSingleCategoryProductsLoadingStates());
+    singleCategoryProducts = [];
     await CheckConnection.checkConnection().then((value) async {
       Constants.setInternetConnection(value);
       if (value) {
@@ -91,6 +93,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List<Product> allProducts = [];
 
   Future<void> getAllProducts() async{
+    allProducts = [];
     await getAllProductsUseCase.execute().then((value) {
       value.fold((l) {
         emit(HomeGetAllProductsErrorStates(l.message));

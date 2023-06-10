@@ -13,7 +13,6 @@ class Components {
 
   static showSnackBar({
     required String message,
-    required Color backgroundColor,
     int durationWithMilliSeconds = 2000,
     required Color textColor,
   }) {
@@ -22,7 +21,7 @@ class Components {
       message,
       margin:
           EdgeInsets.symmetric(vertical: AppSize.s30, horizontal: AppSize.s10),
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.transparent.withOpacity(0.5),
       colorText: textColor,
       animationDuration: const Duration(
         milliseconds: 500,

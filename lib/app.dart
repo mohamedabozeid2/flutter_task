@@ -43,7 +43,7 @@ class MarketSquare extends StatelessWidget {
                     sl(),
                     sl(),
                     sl(),
-                  )..getAllData(),
+                  ),
                 ),
               ],
               child: GetMaterialApp(

@@ -42,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             horizontal: AppSize.s20,
           ),
           color: Colors.black,
-          // backgroundColor: Colors.black,
+          backgroundColor: AppColors.coolGreyColor,
           selectedIndex: HomeCubit.get(context).botNavCurrentIndex,
           activeColor: AppColors.mainColor,
 

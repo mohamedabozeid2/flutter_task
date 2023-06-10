@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task/core/network/check_connection.dart';
+import 'package:flutter_task/core/utils/components.dart';
+import 'package:flutter_task/features/presentation/screens/no_internet_screen/no_internet_screen.dart';
 
 import '../../../../core/hive/hive_helper.dart';
 import '../../../../core/hive/hive_keys.dart';
@@ -53,21 +56,30 @@ class UserCubit extends Cubit<UserStates> {
   Future<void> userLogin({
     required String userName,
     required String password,
+    required BuildContext context,
   }) async {
     emit(UserLoginLoadingState());
-    if (loginValidation(userName: userName, password: password)) {
-      userLoginUseCase
-          .execute(userName: userName, password: password)
-          .then((value) {
-        value.fold((l) {
-          emit(UserLoginErrorState(AppStrings.wrongUserNameOrPassword));
-        }, (r) {
-          addCurrentUserTokenToCacheMemory(token: r);
+    CheckConnection.checkConnection().then((value) {
+      Constants.setInternetConnection(value);
+      if (value) {
+        if (loginValidation(userName: userName, password: password)) {
+          userLoginUseCase
+              .execute(userName: userName, password: password)
+              .then((value) {
+            value.fold((l) {
+              emit(UserLoginErrorState(AppStrings.wrongUserNameOrPassword));
+            }, (r) {
+              addCurrentUserTokenToCacheMemory(token: r);
 
-          emit(UserLoginSuccessState());
-        });
-      });
-    }
+              emit(UserLoginSuccessState());
+            });
+          });
+        }
+      } else {
+        Components.navigateAndFinish(
+            context: context, widget: const NoInternetScreen(fromLogin: true));
+      }
+    });
   }
 
   void addCurrentUserTokenToCacheMemory({
@@ -79,8 +91,10 @@ class UserCubit extends Cubit<UserStates> {
       data: token,
     );
     Constants.setCurrentUserToken(token: token);
-    HiveHelper.putInBox(box: HiveHelper.loggedIn, key: HiveKeys.loggedIn.toString(), data: true);
-
+    HiveHelper.putInBox(
+        box: HiveHelper.loggedIn,
+        key: HiveKeys.loggedIn.toString(),
+        data: true);
   }
 
   void addUserDataToCacheMemory({required User userData}) {
@@ -152,46 +166,55 @@ class UserCubit extends Cubit<UserStates> {
     required String lat,
     required String long,
     required String phone,
+    required BuildContext context,
   }) {
     emit(UserRegisterLoadingState());
-    if (registerValidation(
-        userName: userName,
-        password: password,
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        city: city,
-        street: street,
-        streetNumber: streetNumber,
-        zipCode: zipCode,
-        phone: phone)) {
-      userRegisterUserCase
-          .execute(
-        userName: userName,
-        email: email,
-        password: password,
-        city: city,
-        firstName: firstName,
-        lastName: lastName,
-        lat: lat,
-        long: long,
-        phone: phone,
-        street: street,
-        streetNumber: streetNumber,
-        zipCode: zipCode,
-      )
-          .then((value) {
-        value.fold((l) {
-          emit(UserRegisterErrorState(AppStrings.invalidInputs));
-        }, (r) {
-          HiveHelper.putInBox(
-            box: HiveHelper.loggedIn,
-            key: HiveKeys.loggedIn.toString(),
-            data: true,
-          );
-          emit(UserRegisterSuccessState());
-        });
-      });
-    }
+    CheckConnection.checkConnection().then((value) {
+      Constants.setInternetConnection(value);
+      if (value) {
+        if (registerValidation(
+            userName: userName,
+            password: password,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            city: city,
+            street: street,
+            streetNumber: streetNumber,
+            zipCode: zipCode,
+            phone: phone)) {
+          userRegisterUserCase
+              .execute(
+            userName: userName,
+            email: email,
+            password: password,
+            city: city,
+            firstName: firstName,
+            lastName: lastName,
+            lat: lat,
+            long: long,
+            phone: phone,
+            street: street,
+            streetNumber: streetNumber,
+            zipCode: zipCode,
+          )
+              .then((value) {
+            value.fold((l) {
+              emit(UserRegisterErrorState(AppStrings.invalidInputs));
+            }, (r) {
+              HiveHelper.putInBox(
+                box: HiveHelper.loggedIn,
+                key: HiveKeys.loggedIn.toString(),
+                data: true,
+              );
+              emit(UserRegisterSuccessState());
+            });
+          });
+        }
+      } else {
+        Components.navigateAndFinish(
+            context: context, widget: const NoInternetScreen(fromLogin: true));
+      }
+    });
   }
 }

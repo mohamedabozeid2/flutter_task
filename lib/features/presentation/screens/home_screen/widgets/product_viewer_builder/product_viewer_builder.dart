@@ -8,14 +8,21 @@ import 'widgets/product_item_builder.dart';
 import 'widgets/product_title.dart';
 
 class ProductViewerBuilder extends StatefulWidget {
-  const ProductViewerBuilder({super.key});
+  final String title;
+  final List<Product> products;
+
+  const ProductViewerBuilder({
+    super.key,
+    required this.title,
+    required this.products,
+  });
 
   @override
   State<ProductViewerBuilder> createState() => _ProductViewerBuilderState();
 }
 
 class _ProductViewerBuilderState extends State<ProductViewerBuilder> {
-  final double productItemWidth = Helper.getMaxWidth() * 0.3;
+  final double productItemWidth = Helper.getMaxWidth() * 0.35;
   final double productItemPadding = AppSize.s20;
   final double productDividerWidth = AppSize.s15;
   final double productViewerHeight = Helper.getMaxHeight() * 0.25;
@@ -26,7 +33,12 @@ class _ProductViewerBuilderState extends State<ProductViewerBuilder> {
     List<Product> allProducts = HomeCubit.get(context).allProducts;
     return Column(
       children: [
-        const ProductTitle(),
+        ProductTitle(
+          title: widget.title,
+        ),
+        SizedBox(
+          height: AppSize.s15,
+        ),
         SizedBox(
           height: productViewerHeight,
           child: Row(
@@ -61,7 +73,8 @@ class _ProductViewerBuilderState extends State<ProductViewerBuilder> {
                             transform: Matrix4.identity()
                               ..scale(scale + 0.1, scale + 0.1),
                             child: ProductItemBuilder(
-                              product: allProducts[index],
+                              product: widget.products[index],
+                              productWidth: productItemWidth,
                             ),
                           ),
                         );
@@ -75,6 +88,7 @@ class _ProductViewerBuilderState extends State<ProductViewerBuilder> {
             ],
           ),
         ),
+
       ],
     );
   }

@@ -49,6 +49,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/anims/
     - assets/icons/icons.ttf
 
   fonts:

@@ -3,6 +3,8 @@ class AppStrings {
   static const String userName = 'User Name';
   static const String firstName = 'First Name';
   static const String lastName = 'Last Name';
+  static const String noInternet = 'No Internet Connection';
+  static const String refresh = 'Refresh';
   static const String city = 'City';
   static const String searchProducts = 'Search Products';
   static const String street = 'Street';
@@ -16,6 +18,8 @@ class AppStrings {
   static const String home = 'Home';
   static const String favorite = 'Favorite';
   static const String allProducts = 'All Products';
+  static const String popularProducts = 'Popular Products';
+  static const String topRateProducts = 'Top Rated Products';
   static const String chat = 'Chat';
   static const String profile = 'Profile';
   static const String noEmail = 'Don\'t have an email address?';

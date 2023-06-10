@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/utils/Colors.dart';
 import '../../../../../../../core/utils/app_values.dart';
 import '../../../../../../../core/utils/constants.dart';
 
@@ -23,7 +22,7 @@ class HeadingIconButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(Constants.mainPadding),
         decoration: BoxDecoration(
-            color: AppColors.coolGreyColor,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(
               AppSize.s50,
             )),

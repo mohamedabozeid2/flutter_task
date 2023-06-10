@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/utils/Colors.dart';
 import '../../../../../../../core/utils/app_icons.dart';
 import '../../../../../../../core/utils/app_values.dart';
 import '../../../../../../../core/utils/constants.dart';
@@ -19,7 +18,7 @@ class CustomSearchBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(Constants.mainPadding),
       decoration: BoxDecoration(
-          color: AppColors.coolGreyColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(AppSize.s10)),
       child: Row(
         children: [

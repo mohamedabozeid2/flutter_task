@@ -166,11 +166,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               if (state is UserRegisterErrorState) {
                 Components.showSnackBar(
                   message: state.error,
-                  backgroundColor: Colors.transparent.withOpacity(0.5),
                   textColor: Colors.white,
                 );
-              } else if(state is UserRegisterSuccessState){
-                Components.navigateAndFinish(context: context, widget:  Layout());
+              } else if (state is UserRegisterSuccessState) {
+                Components.navigateAndFinish(
+                    context: context, widget: const Layout());
               }
             },
             builder: (context, state) {
@@ -184,6 +184,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   : CustomButton(
                       fun: () {
                         UserCubit.get(context).userRegister(
+                          context: context,
                           zipCode: zipcodeController.text,
                           streetNumber: streetNumberController.text,
                           street: streetController.text,

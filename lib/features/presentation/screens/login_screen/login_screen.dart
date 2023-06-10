@@ -116,12 +116,11 @@ class _LoginScreenState extends State<LoginScreen> {
               if (state is UserLoginErrorState) {
                 Components.showSnackBar(
                   message: state.error,
-                  backgroundColor: Colors.transparent.withOpacity(0.5),
                   textColor: Colors.white,
                 );
               } else if (state is UserLoginSuccessState) {
                 Components.navigateAndFinish(
-                    context: context, widget: Layout());
+                    context: context, widget: const Layout());
               }
             },
             builder: (context, state) {
@@ -136,6 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         UserCubit.get(context).userLogin(
                           userName: userNameController.text,
                           password: passwordController.text,
+                          context: context,
                         );
                       },
                       text: AppStrings.login,
