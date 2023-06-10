@@ -14,6 +14,7 @@ import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/layout_with_background_image.dart';
 import '../../controller/user_cubit/user_cubit.dart';
 import '../../controller/user_cubit/user_states.dart';
+import '../layout/layout.dart';
 import 'widgets/no_email_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -119,8 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   textColor: Colors.white,
                 );
               } else if (state is UserLoginSuccessState) {
-                // Components.navigateAndFinish(
-                //     context: context, widget: HomeScreen());
+                Components.navigateAndFinish(
+                    context: context, widget: Layout());
               }
             },
             builder: (context, state) {

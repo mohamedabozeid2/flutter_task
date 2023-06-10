@@ -3,23 +3,24 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_task/core/hive/hive_keys.dart';
-import 'package:flutter_task/features/presentation/screens/home_screen/home_screen.dart';
-import 'package:flutter_task/features/presentation/screens/login_screen/login_screen.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
 import 'core/api/main_dio_helper.dart';
 import 'core/hive/hive_helper.dart';
+import 'core/hive/hive_keys.dart';
 import 'core/services/services_locator.dart';
 import 'core/utils/constants.dart';
 import 'features/presentation/controller/BlocObserver/BlocObserver.dart';
+import 'features/presentation/screens/layout/layout.dart';
+import 'features/presentation/screens/login_screen/login_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory directory = await getApplicationDocumentsDirectory();
   Constants.setDirectory(directory);
-  HiveHelper.init(path: Constants.getDirectory()!.path);
+  await HiveHelper.init(path: Constants.getDirectory()!.path);
   ServicesLocator().init();
   MainDioHelper.init();
 
@@ -29,7 +30,7 @@ void main() async {
     key: HiveKeys.loggedIn.toString(),
   );
   if (loggedIn) {
-    startWidget = const HomeScreen();
+    startWidget = Layout();
   } else {
     startWidget = const LoginScreen();
   }

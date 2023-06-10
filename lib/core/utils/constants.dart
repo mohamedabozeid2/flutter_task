@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter_task/core/utils/app_values.dart';
+
 import '../../features/domain/entities/user.dart';
 
 class Constants {
@@ -7,6 +9,7 @@ class Constants {
   static bool _internetConnection = false;
   static User? _currentUser;
   static String _currentUserToken = "";
+  static double mainPadding = AppSize.s15;
 
   static String getCurrentUserToken() => _currentUserToken;
 

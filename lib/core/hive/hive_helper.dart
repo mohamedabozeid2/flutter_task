@@ -31,7 +31,7 @@ class HiveHelper {
     required Box box,
     required String key,
   }) async {
-    return await box.get(key);
+    return await box.get(key,defaultValue: false);
   }
 
   static void removeData({

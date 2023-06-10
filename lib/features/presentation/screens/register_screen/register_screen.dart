@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task/core/utils/app_icons.dart';
-import 'package:flutter_task/core/utils/app_values.dart';
-import 'package:flutter_task/core/utils/components.dart';
-import 'package:flutter_task/core/widgets/adaptive_indicator.dart';
-import 'package:flutter_task/core/widgets/custom_button.dart';
-import 'package:flutter_task/core/widgets/custom_text_field.dart';
-import 'package:flutter_task/features/presentation/controller/user_cubit/user_cubit.dart';
-import 'package:flutter_task/features/presentation/controller/user_cubit/user_states.dart';
-import 'package:flutter_task/features/presentation/screens/home_screen/home_screen.dart';
 
 import '../../../../core/utils/app_fonts.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/app_values.dart';
 import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/components.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/strings.dart';
+import '../../../../core/widgets/adaptive_indicator.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/layout_with_background_image.dart';
+import '../../controller/user_cubit/user_cubit.dart';
+import '../../controller/user_cubit/user_states.dart';
+import '../layout/layout.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -170,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textColor: Colors.white,
                 );
               } else if(state is UserRegisterSuccessState){
-                Components.navigateAndFinish(context: context, widget: HomeScreen());
+                Components.navigateAndFinish(context: context, widget:  Layout());
               }
             },
             builder: (context, state) {

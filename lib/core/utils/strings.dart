@@ -4,6 +4,7 @@ class AppStrings {
   static const String firstName = 'First Name';
   static const String lastName = 'Last Name';
   static const String city = 'City';
+  static const String searchProducts = 'Search Products';
   static const String street = 'Street';
   static const String streetNumber = 'Street Number';
   static const String zipcode = 'ZIP Code';
@@ -12,6 +13,11 @@ class AppStrings {
   static const String email = 'Email';
   static const String login = 'Login';
   static const String signUp = 'Sign Up';
+  static const String home = 'Home';
+  static const String favorite = 'Favorite';
+  static const String allProducts = 'All Products';
+  static const String chat = 'Chat';
+  static const String profile = 'Profile';
   static const String noEmail = 'Don\'t have an email address?';
   static const String emailValidation = 'Please enter your email';
   static const String firstNameValidation = 'Please enter your first name';

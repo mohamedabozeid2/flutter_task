@@ -13,7 +13,11 @@ import 'features/presentation/controller/user_cubit/user_cubit.dart';
 
 class MarketSquare extends StatelessWidget {
   final Widget startWidget;
-  const MarketSquare({super.key, required this.startWidget,});
+
+  const MarketSquare({
+    super.key,
+    required this.startWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,11 @@ class MarketSquare extends StatelessWidget {
                   ),
                 ),
                 BlocProvider(
-                  create: (BuildContext context) => HomeCubit(),
+                  create: (BuildContext context) => HomeCubit(
+                    sl(),
+                    sl(),
+                    sl(),
+                  )..getAllData(),
                 ),
               ],
               child: GetMaterialApp(
