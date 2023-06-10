@@ -3,8 +3,11 @@ class AppStrings {
   static const String userName = 'User Name';
   static const String firstName = 'First Name';
   static const String lastName = 'Last Name';
+  static const String price = 'Price';
+  static const String addToCart = 'Add to Cart';
   static const String noInternet = 'No Internet Connection';
   static const String refresh = 'Refresh';
+  static const String details = 'Details';
   static const String city = 'City';
   static const String searchProducts = 'Search Products';
   static const String street = 'Street';

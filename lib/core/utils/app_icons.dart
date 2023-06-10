@@ -14,4 +14,5 @@ class AppIcons {
   static IconData chatIcon = IconBroken.Chat;
   static IconData profileIcon = IconBroken.Profile;
   static IconData searchIcon = IconBroken.Search;
+  static IconData starIcon = IconBroken.Star;
 }

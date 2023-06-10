@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/app_values.dart';
+import '../../../../../../../core/utils/components.dart';
 import '../../../../../../../core/utils/helper.dart';
 import '../../../../../../../core/widgets/cached_image.dart';
 import '../../../../../../domain/entities/product.dart';
+import '../../../../product_screen/product_screen.dart';
 
 class ProductItemBuilder extends StatelessWidget {
   final Product product;
@@ -18,7 +20,9 @@ class ProductItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Components.navigateTo(context, ProductScreen(product: product));
+      },
       child: Padding(
         padding: EdgeInsets.all(AppSize.s20),
         child: Container(
