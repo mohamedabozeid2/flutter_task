@@ -40,12 +40,12 @@ class HiveHelper {
     return await box.put(key, data);
   }
 
-  static Future<void> putInFavoriteProducts({
-    required List<Product> favoriteList,
-  }) async {
-    return await favoriteProducts.put(
-        HiveKeys.favoriteProducts.toString(), favoriteList);
-  }
+  // static Future<void> putInFavoriteProducts({
+  //   required List<Product> favoriteList,
+  // }) async {
+  //   return await favoriteProducts.put(
+  //       HiveKeys.favoriteProducts.toString(), favoriteList);
+  // }
 
   static Future<dynamic> getBoxData({
     required Box box,
@@ -55,14 +55,14 @@ class HiveHelper {
     return await box.get(key, defaultValue: false);
   }
 
-  static Future<List<Product>> getFavoriteBox() async {
-    print("TEST");
-    print(favoriteProducts.get(HiveKeys.favoriteProducts.toString()).runtimeType);
-    final List<Product> defaultList = [];
-    final List<Product>? favoriteList =
-        await favoriteProducts.get(HiveKeys.favoriteProducts.toString());
-    return favoriteList ?? defaultList;
-  }
+  // static Future<List<Product>> getFavoriteBox() async {
+  //   print("TEST");
+  //   print(favoriteProducts.get(HiveKeys.favoriteProducts.toString()).runtimeType);
+  //   final List<Product> defaultList = [];
+  //   final List<Product>? favoriteList =
+  //       await favoriteProducts.get(HiveKeys.favoriteProducts.toString());
+  //   return favoriteList ?? defaultList;
+  // }
 
   static void removeData({
     required Box box,

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task/core/utils/components.dart';
-import 'package:flutter_task/core/utils/strings.dart';
-import 'package:flutter_task/features/presentation/controller/home_cubit/home_cubit.dart';
 
 import '../../../../../../../core/utils/app_fonts.dart';
 import '../../../../../../../core/utils/app_icons.dart';
@@ -26,11 +23,11 @@ class AddFavoriteButton extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              HomeCubit.get(context).addToFavorite(newProduct: product);
-              Components.showSnackBar(
-                message: AppStrings.addedToFavorite,
-                textColor: Colors.white,
-              );
+              // HomeCubit.get(context).addToFavorite(newProduct: product);
+              // Components.showSnackBar(
+              //   message: AppStrings.addedToFavorite,
+              //   textColor: Colors.white,
+              // );
             },
             child: Container(
               padding: EdgeInsets.all(AppSize.s20),
