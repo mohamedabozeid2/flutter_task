@@ -22,6 +22,7 @@ class AppStrings {
   static const String email = 'Email';
   static const String login = 'Login';
   static const String signUp = 'Sign Up';
+  static const String addedToFavorite = 'Added to Favorite';
   static const String home = 'Home';
   static const String favorite = 'Favorite';
   static const String allProducts = 'All Products';

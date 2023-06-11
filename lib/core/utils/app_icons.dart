@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../config/styles/icons_broken.dart';
 
 class AppIcons {
-  static IconData visibility = IconBroken.Bookmark;
+  static IconData visibility = Icons.visibility;
   static IconData visibilityOff = Icons.visibility_off;
   static IconData userName = Icons.person;
   static IconData password = Icons.lock;

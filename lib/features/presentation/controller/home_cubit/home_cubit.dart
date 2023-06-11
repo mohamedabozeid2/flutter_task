@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task/core/hive/hive_helper.dart';
 
 import '../../../../core/network/check_connection.dart';
 import '../../../../core/utils/constants.dart';
@@ -130,4 +131,18 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   void checkOut() {}
+
+  List<Product> favoriteProducts = [];
+
+  Future<void> addToFavorite({
+    required Product newProduct,
+  }) async {
+    List<Product> favoriteProducts = [];
+    List<Product> cachedProducts = await HiveHelper.getFavoriteBox();
+    favoriteProducts.addAll(cachedProducts);
+    favoriteProducts.add(newProduct);
+    HiveHelper.putInFavoriteProducts(
+      favoriteList: favoriteProducts,
+    );
+  }
 }

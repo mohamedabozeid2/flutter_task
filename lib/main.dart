@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/features/domain/entities/product.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
@@ -14,7 +15,6 @@ import 'core/utils/constants.dart';
 import 'features/presentation/controller/BlocObserver/BlocObserver.dart';
 import 'features/presentation/screens/layout/layout.dart';
 import 'features/presentation/screens/login_screen/login_screen.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +29,12 @@ void main() async {
     box: HiveHelper.loggedIn,
     key: HiveKeys.loggedIn.toString(),
   );
+  List<Product> favoriteProducts = [];
+  // favoriteProducts.addAll(await HiveHelper.getFavoriteBox());
+  HiveHelper.getFavoriteBox();
+  Constants.setFavoriteProducts(favoriteProducts: favoriteProducts);
   if (loggedIn) {
-    startWidget = Layout();
+    startWidget = const Layout();
   } else {
     startWidget = const LoginScreen();
   }

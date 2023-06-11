@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_task/core/utils/app_values.dart';
+import 'package:flutter_task/features/domain/entities/product.dart';
 
 import '../../features/domain/entities/user.dart';
 
@@ -10,6 +11,14 @@ class Constants {
   static User? _currentUser;
   static String _currentUserToken = "";
   static double mainPadding = AppSize.s15;
+  static final List<Product> _favoriteProducts = [];
+
+  static void setFavoriteProducts({
+    required List<Product> favoriteProducts
+}){
+    _favoriteProducts.addAll(favoriteProducts);
+  }
+  static List<Product> getFavoriteProducts()=> _favoriteProducts;
 
   static String getCurrentUserToken() => _currentUserToken;
 
