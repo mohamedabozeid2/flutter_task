@@ -26,3 +26,5 @@ class HomeGetSingleCategoryProductsErrorStates extends HomeStates{
 
   HomeGetSingleCategoryProductsErrorStates(this.error);
 }
+
+class HomeRemoveFromCartSuccessState extends HomeStates{}

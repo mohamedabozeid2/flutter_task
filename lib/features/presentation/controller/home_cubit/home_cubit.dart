@@ -35,7 +35,7 @@ class HomeCubit extends Cubit<HomeStates> {
       Constants.setInternetConnection(value);
       if (value) {
         await Future.wait([
-          getAllProducts().then((value){
+          getAllProducts().then((value) {
             getAllCategories();
           }),
         ]);
@@ -92,7 +92,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   List<Product> allProducts = [];
 
-  Future<void> getAllProducts() async{
+  Future<void> getAllProducts() async {
     allProducts = [];
     await getAllProductsUseCase.execute().then((value) {
       value.fold((l) {
@@ -104,4 +104,30 @@ class HomeCubit extends Cubit<HomeStates> {
       });
     });
   }
+
+  List<Product> cartItems = [];
+  double totalCheckMoney = 0;
+
+  void addToCart({
+    required Product product,
+  }) {
+    cartItems.add(product);
+    totalCheckMoney += double.parse(product.price.toString()).round();
+    totalCheckMoney.round();
+  }
+
+  void removeFromCart({
+    required Product product,
+  }) {
+    for (var element in cartItems) {
+      if (element.id == product.id) {
+        cartItems.remove(product);
+        totalCheckMoney -= double.parse(product.price).round();
+        break;
+      }
+    }
+    emit(HomeRemoveFromCartSuccessState());
+  }
+
+  void checkOut() {}
 }

@@ -4,9 +4,15 @@ import '../../../../../../../core/utils/app_fonts.dart';
 import '../../../../../../../core/utils/app_icons.dart';
 import '../../../../../../../core/utils/app_values.dart';
 import '../../../../../../../core/utils/colors.dart';
+import '../../../../../../domain/entities/product.dart';
 
 class AddFavoriteButton extends StatelessWidget {
-  const AddFavoriteButton({super.key});
+  final Product product;
+
+  const AddFavoriteButton({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class AddFavoriteButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
 
             },
             child: Container(
@@ -26,8 +32,7 @@ class AddFavoriteButton extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(AppSize.s20),
                     bottomLeft: Radius.circular(AppSize.s20),
-                  )
-              ),
+                  )),
               child: Icon(
                 AppIcons.favoriteIcon,
                 size: AppFontSize.s24,

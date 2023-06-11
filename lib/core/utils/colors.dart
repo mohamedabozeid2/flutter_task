@@ -6,5 +6,6 @@ class AppColors {
   static Color coolGreyColor = const Color(0xff9197AE).withOpacity(0.7);
   static Color creamColor = const Color(0xffEFF6EE);
   static Color lightOrangeColor = const Color(0xffFFE7CE);
+  static Color orange = Colors.deepOrange;
 
 }

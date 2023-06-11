@@ -35,7 +35,6 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(),
       bottomNavigationBar: const BottomNavBar(),
       body: Container(
         color: AppColors.coolGreyColor,

@@ -2,7 +2,11 @@ class AppStrings {
   static const String appName = 'Market Square';
   static const String userName = 'User Name';
   static const String firstName = 'First Name';
+  static const String yourCart = 'Your Cart';
   static const String lastName = 'Last Name';
+  static const String checkOut = 'Check Out';
+  static const String total = 'Total';
+  static const String addedToCart = 'Added to cart';
   static const String price = 'Price';
   static const String addToCart = 'Add to Cart';
   static const String noInternet = 'No Internet Connection';

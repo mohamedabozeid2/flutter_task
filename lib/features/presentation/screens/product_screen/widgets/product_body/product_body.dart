@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/utils/Colors.dart';
 import '../../../../../../core/utils/app_fonts.dart';
 import '../../../../../../core/utils/app_values.dart';
+import '../../../../../../core/utils/components.dart';
 import '../../../../../../core/utils/helper.dart';
 import '../../../../../../core/utils/strings.dart';
 import '../../../../../../core/widgets/custom_button.dart';
 import '../../../../../domain/entities/product.dart';
+import '../../../../controller/home_cubit/home_cubit.dart';
 import 'widgets/add_favorite_button.dart';
 import 'widgets/product_body_title.dart';
 
@@ -30,7 +32,7 @@ class ProductBody extends StatelessWidget {
       child: Column(
         children: [
           ProductBodyTitle(title: product.title),
-          const AddFavoriteButton(),
+          AddFavoriteButton(product: product),
           Padding(
             padding: EdgeInsets.all(AppSize.s15),
             child: Row(
@@ -54,7 +56,11 @@ class ProductBody extends StatelessWidget {
             height: AppSize.s15,
           ),
           CustomButton(
-            fun: () {},
+            fun: () {
+              HomeCubit.get(context).addToCart(product: product);
+              Components.showSnackBar(
+                  message: AppStrings.addedToCart, textColor: Colors.white);
+            },
             text: AppStrings.addToCart,
             height: AppSize.s70,
             fontSize: AppFontSize.s30,
